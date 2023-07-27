@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
@@ -25,11 +26,25 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::paginate('10')->all();
+
+        $users = DB::table('users')->select('*')
+            ->where('status', '0')
+            ->orderBy('nom', 'asc')
+            ->paginate('10');
+        return view('admin.users.index', compact('users'));
+        // $users = User::paginate('10')->all();
         // return view('admin.users.index')->with('users', $users);
         // $users = DB::table('users')->select('*')->orderBy('nom', 'asc')->get();
-        return view('admin.users.index', compact('users'));
+        // return view('admin.users.index', compact('users'));
         // ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+    public function stagiaire(Request $request)
+    {
+        $users = DB::table('users')->select('*')
+            ->where('status', '1')
+            ->orderBy('nom', 'asc')
+            ->paginate('10');
+        return view('admin.users.stagiaire', compact('users'));
     }
 
     /**
@@ -39,7 +54,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles = Role::pluck('name', 'name')->all();
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -73,6 +89,7 @@ class UsersController extends Controller
         $user->fonction = $request->fonction;
         $user->naissance = $request->naissance;
         $user->password = $request->password;
+        $user->role_id = $request->role_id;
         $user['password'] = Hash::make($request['password']);
         $user['password_confirm'] = Hash::make($request['password_confirm']);
         // $user->password_confirm = $request->password_confirm;
@@ -81,11 +98,10 @@ class UsersController extends Controller
             $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
             $doc_lm->move(public_path("docs/images/lms"), $lm_name);
             $user->photo = $lm_name;
+            $user->assignRole($request->input('roles'));
         }
 
         $user->save();
-        // Alert::success('succes', "nouvel agent ajouté!");
-        // return Redirect::back('admin.users.index')->with("success", "agent ajouté avec succès!");
         return redirect()->route("admin.users.index")->with("success",  "agent ajouté avec succès!");
     }
 
@@ -133,6 +149,7 @@ class UsersController extends Controller
             'photo' => ['required'],
             'matricule' => ['nullable'],
             'password' => ['required', 'same:password_confirm'],
+            'status' => ['required'],
             // 'password_confirm' => ['required', 'same:password'],
         ]);
         $user = new User();
@@ -144,6 +161,8 @@ class UsersController extends Controller
         $user->cni = $request->cni;
         $user->fonction = $request->fonction;
         $user->naissance = $request->naissance;
+        $user->status = $request->status;
+        $user->role_id = $request->role_id;
         $user['password'] = Hash::make($request['password']);
         $user['password_confirm'] = Hash::make($request['password_confirm']);
         // $user->password_confirm = $request->password_confirm;

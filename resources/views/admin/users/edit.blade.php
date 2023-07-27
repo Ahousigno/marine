@@ -11,7 +11,7 @@
 @section('info-dashboard')
 <div class="row mt-3">
 
-    <h4>Modification des information d'un agent</h4>
+    <h4>Modification des informations d'un nouveau personnel</h4>
 
 </div>
 @endsection
@@ -23,7 +23,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title">
-                    <h4 class="card-title">Ajout d'un nouvel utilisateur</h4>
+                    <h4 class="card-title">Ajout d'un nouveau personnel</h4>
                 </div>
             </div>
             <div class="card-body">

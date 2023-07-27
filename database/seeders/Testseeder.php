@@ -27,8 +27,10 @@ class Testseeder extends Seeder
                 'fonction' => date('2000-02-01'),
                 'photo' => 'Signo Marceline',
                 'password_confirm' => bcrypt('12345'),
+                'status' => '0',
             ],
 
         ]);
-    }
+        
+}
 }

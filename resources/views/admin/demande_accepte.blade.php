@@ -28,8 +28,10 @@ use Carbon\Carbon; ?>
         <div class="col-sm-12">
             <div class="card" style="margin-top:10px">
                 <div class="card-header d-flex justify-content-between">
-                    <div class="header-title" <h4 class="card-title" style="text-align: center;">Liste des Demandes de
-                        permission acceptées
+                    <div class="header-title">
+                        <h4 class="card-title" style="text-align: center;">Liste des Demandes
+                            de
+                            permission acceptées
                         </h4>
                     </div>
 
@@ -53,8 +55,6 @@ use Carbon\Carbon; ?>
                                 <?php
                                 $user = App\Models\User::first();
                                 ?>
-
-
 
                                 @if (Auth::user())
                                 <tr>

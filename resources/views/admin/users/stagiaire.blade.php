@@ -11,7 +11,7 @@
 @section('info-dashboard')
 <div class="row mt-3">
 
-    <h4>Liste du personnel</h4>
+    <h4>Liste des stagiaires</h4>
 
 </div>
 @endsection
@@ -52,7 +52,7 @@
                 <div class="card" style="margin-top:10px">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title" style="text-align:center;">Liste du personnel
+                            <h4 class="card-title" style="text-align:center;">Liste des stagiaires
                             </h4>
                         </div>
                         <div class="">

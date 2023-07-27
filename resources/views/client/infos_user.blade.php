@@ -11,23 +11,20 @@
 @section('info-dashboard')
 <div class="row mt-3">
 
-    <h4>Ajout d'un nouveau personnel</h4>
+    <h4>Completer mes informations</h4>
 
 </div>
 @endsection
 
 @section('content')
-<?php
-$role = App\Models\Role::first();
-?>
 <?php $nav = "create" ?>
 <div class="row">
     <div class="col-12 m-4">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title">
-                    <h4 class="card-title">Ajout d'un nouveau personnel</h4>
-                </div>
+                    <h4 class="card-title">completer mes informations</h4>
+                </div>l
             </div>
             <div class="card-body">
                 <div class="new-user-info">
@@ -58,7 +55,8 @@ $role = App\Models\Role::first();
                             @endif
                         </div>
 
-                        <form role="form" action="{{route('admin.users.store')}}" enctype="multipart/form-data" method="POST">
+                        <form role="form" action="{{route('admin.users.store')}}" enctype="multipart/form-data"
+                            method="POST">
                             @csrf
                             <div class="card">
                                 <div class="card-header">
@@ -70,7 +68,8 @@ $role = App\Models\Role::first();
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label for="nom">Nom de l'agent<span style="color: red;"></span></label>
+                                                    <label for="nom">Nom de l'agent<span
+                                                            style="color: red;"></span></label>
                                                     <input type="text" id="nom" class="form-control" name="nom">
                                                     @if ($errors->has('nom'))
                                                     <span class="text-danger fst-italic">
@@ -81,7 +80,8 @@ $role = App\Models\Role::first();
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label for="prenom"> prénoms de l'agent<span style="color: red;"></span></label>
+                                                    <label for="prenom"> prénoms de l'agent<span
+                                                            style="color: red;"></span></label>
                                                     <input type="text" id="prenom" class="form-control" name="prenom">
                                                     @if ($errors->has('prenom'))
                                                     <span class="text-danger fst-italic">
@@ -94,7 +94,8 @@ $role = App\Models\Role::first();
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label for="contact">Contact<span style="color: red;"></span></label>
+                                                    <label for="contact">Contact<span
+                                                            style="color: red;"></span></label>
                                                     <input type="text" id="contact" class="form-control" name="contact">
                                                     @if ($errors->has('contact'))
                                                     <span class="text-danger fst-italic">
@@ -120,8 +121,10 @@ $role = App\Models\Role::first();
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label for="password">Mot de Passe<span style="color: red;"></span></label>
-                                                    <input type="text" id="password" class="form-control" name="password">
+                                                    <label for="password">Mot de Passe<span
+                                                            style="color: red;"></span></label>
+                                                    <input type="text" id="password" class="form-control"
+                                                        name="password">
                                                     @if ($errors->has('password'))
                                                     <span class="text-danger fst-italic">
                                                         {{ $errors->first('password') }}
@@ -131,8 +134,10 @@ $role = App\Models\Role::first();
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label for="password_confirm">Confirmer mot de passe<span style="color: red;"></span></label>
-                                                    <input type="text" id="password_confirm" class="form-control" name="password_confirm">
+                                                    <label for="password_confirm">Confirmer mot de passe<span
+                                                            style="color: red;"></span></label>
+                                                    <input type="text" id="password_confirm" class="form-control"
+                                                        name="password_confirm">
                                                     @if ($errors->has('password_confirm'))
                                                     <span class="text-danger fst-italic">
                                                         {{ $errors->first('password_confirm') }}
@@ -156,8 +161,10 @@ $role = App\Models\Role::first();
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label for="matricule">Matricule <span style="color: red;"></span></label>
-                                                    <input type="matricule" id="matricule" class="form-control" name="matricule">
+                                                    <label for="matricule">Matricule <span
+                                                            style="color: red;"></span></label>
+                                                    <input type="matricule" id="matricule" class="form-control"
+                                                        name="matricule">
                                                     @if ($errors->has('matricule'))
                                                     <span class="text-danger fst-italic">
                                                         {{ $errors->first('matricule') }}
@@ -170,8 +177,10 @@ $role = App\Models\Role::first();
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label for="naissance">Date de Naissance<span style="color: red;"></span></label>
-                                                    <input type="date" id="naissance" class="form-control" name="naissance">
+                                                    <label for="naissance">Date de Naissance<span
+                                                            style="color: red;"></span></label>
+                                                    <input type="date" id="naissance" class="form-control"
+                                                        name="naissance">
                                                     @if ($errors->has('naissance'))
                                                     <span class="text-danger fst-italic">
                                                         {{ $errors->first('naissance') }}
@@ -181,8 +190,10 @@ $role = App\Models\Role::first();
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label for="fonction">Date de prise de fonction <span style="color: red;"></span></label>
-                                                    <input type="date" id="fonction" class="form-control" name="fonction">
+                                                    <label for="fonction">Date de prise de fonction <span
+                                                            style="color: red;"></span></label>
+                                                    <input type="date" id="fonction" class="form-control"
+                                                        name="fonction">
                                                     @if ($errors->has('fonction'))
                                                     <span class="text-danger fst-italic">
                                                         {{ $errors->first('fonction') }}
@@ -222,20 +233,15 @@ $role = App\Models\Role::first();
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="">role</label>
-
-                                                    <select class="form-control custom-select" required name="role_id">
-                                                        <option selected value="" name="role_id">----
-                                                            Selectionnez ---</option>
-                                                        @foreach($roles as $role)
-                                                        <option {{ ($role->id == $user->role_id) ? 'selected' : '' }} value="{{$role->id}}">
-                                                            {{$role->role}}
-                                                        </option>
-                                                        @endforeach
+                                                    <select class="form-select" type="text" name="role">
+                                                        <option selected>...</option>
+                                                        <option value="Commercial">admin</option>
+                                                        <option value="Scientifique">stagiaire</option>
+                                                        <option value="Scientifique">autre</option>
                                                     </select>
-
                                                     @if ($errors->has('role'))
                                                     <span class="text-danger fst-italic">
-                                                        {{ $errors->first('role') }}
+                                                        {{ $errors->first('role) }}
                                                     </span>
                                                     @endif
                                                 </div>

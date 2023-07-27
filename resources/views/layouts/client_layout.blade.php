@@ -9,8 +9,7 @@
     <title>@yield('title')</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/offcanvas-navbar/">
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('client/assets/css/bootstrap.min.css')}}" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{{asset('client/assets/css/bootstrap.min.css')}}" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Favicons -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}" />
     <meta name="theme-color" content="#7952b3">
@@ -24,15 +23,12 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('client/assets/css/offcanvas.css')}}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="https://kit.fontawesome.com/1066a12b52.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link href="//db.onlinewebfonts.com/c/9cb830e3472ffe12fb4943f3ed80832f?family=Segoe+Print" rel="stylesheet"
-        type="text/css" />
+    <link href="//db.onlinewebfonts.com/c/9cb830e3472ffe12fb4943f3ed80832f?family=Segoe+Print" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="footer.css">
     <script src="https://kit.fontawesome.com/f200a6bdeb.js" crossorigin="anonymous"></script>
 </head>
@@ -43,57 +39,38 @@
         <div class="bottomnav">
             <nav class="navbar navbar-expand-lg  navbar-dark" aria-label="Main navigation" id="nav-bar">
                 <div class="container-fluid container">
-                    <a class="navbar-brand" href="#"><img class="me-3" src="{{asset('client/assets/img/logo.jpg')}}"
-                            alt="" width="58" height="58"></a>
-                    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
-                        aria-label="Toggle navigation">
+                    <a class="navbar-brand" href="#"><img class="me-3" src="{{asset('client/assets/img/logo.jpg')}}" alt="" width="58" height="58"></a>
+                    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                         <i class="fa fa-bars fa-2x" style="color: black" aria-hidden="true"></i>
                     </button>
                     <div class="navbar-collapse  justify-content-between offcanvas-collapse" id="navbarsExampleDefault">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "accueil") : ?>active<?php endif; ?>"
-                                    href="{{route('client.accueil')}}" id="nav-link">
+                                <a class="nav-link <?php if ($nav == "accueil") : ?>active<?php endif; ?>" href="{{route('client.accueil')}}" id="nav-link">
                                     <i class="fa fa-home" aria-hidden="true"></i> Accueil
                                 </a>
                             </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "index") : ?>active<?php endif; ?>" href="{{route('admin.users.index')}}" id="nav-link">
-                                    <i class="fa fa-send" aria-hidden="true"></i> Ajouter un nouvel agent
-                                </a>
-                            </li> -->
+
+                            @if (Auth::user())
+
+                            <!-- nouveau dropdown -->
                             <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "demande_permission") : ?>active<?php endif; ?>"
-                                    href="{{route('client.demande_permission')}}" id="nav-link">
+                                <a class="nav-link <?php if ($nav == "demande_permission") : ?>active<?php endif; ?>" href="{{route('client.demande_permission')}}" id="nav-link">
                                     <i class="fa fa-archive" aria-hidden="true"></i> Demande de permission
                                 </a>
                             </li>
+                            @endif
                         </ul>
                         <ul class="navbar-nav">
                             @if (Auth::user())
-                            <!-- <div class="dropdown">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown link
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div> -->
-                            <!-- nouveau dropdown -->
-
                             <li class="nav-item">
                                 <span class="dropdown">
-                                    <a class="dropdown-toggle text-decoration-none" href="#" role="button"
-                                        data-bs-toggle="dropdown" id="nav-link">
+                                    <a class="dropdown-toggle text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" id="nav-link">
                                         <i class="fa fa-user" aria-hidden="true"></i> {{Auth::user()['nom']}}
                                     </a>
                                     <ul class=" dropdown-menu">
                                         <li>
-                                            <a class="dropdown-item" href="{{route('admin.index_admin')}}"
-                                                target="_blank">Tableau
+                                            <a class="dropdown-item" href="{{route('admin.index_admin')}}" target="_blank">Tableau
                                                 de bord</a>
                                         </li>
 
@@ -104,8 +81,7 @@
                                             </a>
                                         </li>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
                                     </ul>
@@ -114,14 +90,13 @@
 
                             @else
                             <li class="nav-item ">
-                                <a class="nav-link" href="{{route('login')}}" id="nav-link"><i class="fa fa-user"
-                                        aria-hidden="true"></i> Connecter</a>
+                                <a class="nav-link" href="{{route('login')}}" id="nav-link"><i class="fa fa-user" aria-hidden="true"></i> Connecter</a>
                             </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="{{route('register')}}" id="nav-link">
-                                    </i> S'inscrire
-                                </a>
-                            </li> -->
+                            {{--<li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.users.create')}}" id="nav-link">
+                            </i> S'inscrire
+                            </a>--}}
+
 
                             @endif
                         </ul>
@@ -191,14 +166,11 @@
     </footer>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
-    <script src="{{asset('client/assets/js/bootstrap.bundle.min.js')}}"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <script src="{{asset('client/assets/js/bootstrap.bundle.min.js')}}" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="{{asset('client/assets/js/offcanvas.js')}}"></script>
 
@@ -215,13 +187,13 @@
 </body>
 
 <style>
-ul {
-    padding-left: 0;
-}
+    ul {
+        padding-left: 0;
+    }
 
-h5 {
-    margin-top: 25px;
-}
+    h5 {
+        margin-top: 25px;
+    }
 </style>
 
 </html>

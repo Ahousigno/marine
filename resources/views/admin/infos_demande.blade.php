@@ -70,6 +70,7 @@ use Carbon\Carbon; ?>
                                         <th>Motif de la demande</th>
                                         <th>Date de départ</th>
                                         <th>Date de reprise</th>
+                                        <th>Date de demande</th>
                                         <th style="min-width: 100px">Actions</th>
                                     </tr>
                                 </thead>
@@ -78,8 +79,6 @@ use Carbon\Carbon; ?>
                                     <?php
                                     $user = App\Models\User::first();
                                     ?>
-
-
 
                                     @if (Auth::user())
                                     <tr>
@@ -90,14 +89,13 @@ use Carbon\Carbon; ?>
                                         <td>{{ $demande->motif }}</td>
                                         <td>{{ Carbon::parse($demande->date_depart)->format('d F Y') }}</td>
                                         <td>{{ Carbon::parse($demande->date_retour)->format('d F Y') }}</td>
+                                        <td>{{ Carbon::parse($demande->created_at)->format('d F Y') }}</td>
                                         <td>
                                             @if($demande->dg_validated == 0 && empty($demande->motif_rejet))
                                             <div class="d-flex justify-content-sm-around">
                                                 <div class="mt-2 text-center">
 
-                                                    <!-- a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm
-                                                btn-icon btn-warning" data-toggle="tooltip" data-placement="top"
-                                                title="Edit" data-original-title="Edit"> -->
+
 
                                                     <a href="#" class="btn btn-success btn-icon" data-bs-toggle="modal"
                                                         data-bs-target="#validation" data-placement=" top"
