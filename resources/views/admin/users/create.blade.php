@@ -194,7 +194,7 @@ $role = App\Models\Role::first();
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label for="photo">Photo <span style="color: red;"></span></label>
-                                                    <input type="file" id="photo class=" form-control" name="photo">
+                                                    <input type="file" id="photo" class="form-control" name="photo">
                                                     @if ($errors->has('photo'))
                                                     <span class="text-danger fst-italic">
                                                         {{ $errors->first('photo') }}
@@ -209,8 +209,8 @@ $role = App\Models\Role::first();
                                                     <label for="">Status</label>
                                                     <select class="form-select" type="text" name="status">
                                                         <option selected>...</option>
-                                                        <option value="Commercial">Stagiaire</option>
-                                                        <option value="Scientifique">Personnel</option>
+                                                        <option value="stagiaire">Stagiaire</option>
+                                                        <option value="personnel">Personnel</option>
                                                     </select>
                                                     @if ($errors->has('status'))
                                                     <span class="text-danger fst-italic">
@@ -222,17 +222,11 @@ $role = App\Models\Role::first();
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="">role</label>
-
-                                                    <select class="form-control custom-select" required name="role_id">
-                                                        <option selected value="" name="role_id">----
-                                                            Selectionnez ---</option>
-                                                        @foreach($roles as $role)
-                                                        <option {{ ($role->id == $user->role_id) ? 'selected' : '' }} value="{{$role->id}}">
-                                                            {{$role->role}}
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
-
+                                                        <select name="roles[]" class="form-control" multiple>
+                                                            @foreach($roles as $role)
+                                                                <option value="{{ $role }}">{{ $role }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     @if ($errors->has('role'))
                                                     <span class="text-danger fst-italic">
                                                         {{ $errors->first('role') }}

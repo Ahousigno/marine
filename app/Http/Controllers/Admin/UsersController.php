@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Permission;
 
 class UsersController extends Controller
 {
@@ -22,13 +23,15 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index(Request $request)
     {
 
+
+
         $users = DB::table('users')->select('*')
-            ->where('status', '0')
+            ->where('status', 'personnel')
             ->orderBy('nom', 'asc')
             ->paginate('10');
         return view('admin.users.index', compact('users'));
@@ -41,7 +44,7 @@ class UsersController extends Controller
     public function stagiaire(Request $request)
     {
         $users = DB::table('users')->select('*')
-            ->where('status', '1')
+            ->where('status', 'stagiaire')
             ->orderBy('nom', 'asc')
             ->paginate('10');
         return view('admin.users.stagiaire', compact('users'));
@@ -50,11 +53,12 @@ class UsersController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
         $roles = Role::pluck('name', 'name')->all();
+//        dd($roles['Admin']);
         return view('admin.users.create', compact('roles'));
     }
 
@@ -62,7 +66,7 @@ class UsersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -89,7 +93,8 @@ class UsersController extends Controller
         $user->fonction = $request->fonction;
         $user->naissance = $request->naissance;
         $user->password = $request->password;
-        $user->role_id = $request->role_id;
+        $user->status = $request->status;
+//        $user->role_id = $request->role_id;
         $user['password'] = Hash::make($request['password']);
         $user['password_confirm'] = Hash::make($request['password_confirm']);
         // $user->password_confirm = $request->password_confirm;
@@ -98,9 +103,10 @@ class UsersController extends Controller
             $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
             $doc_lm->move(public_path("docs/images/lms"), $lm_name);
             $user->photo = $lm_name;
-            $user->assignRole($request->input('roles'));
+//            $user->assignRole($request->input('roles'));
         }
 
+        $user->assignRole($request->input('roles'));
         $user->save();
         return redirect()->route("admin.users.index")->with("success",  "agent ajouté avec succès!");
     }
@@ -109,7 +115,7 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -121,7 +127,7 @@ class UsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -134,7 +140,7 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request)
     {
@@ -149,7 +155,7 @@ class UsersController extends Controller
             'photo' => ['required'],
             'matricule' => ['nullable'],
             'password' => ['required', 'same:password_confirm'],
-            'status' => ['required'],
+//            'status' => ['required'],
             // 'password_confirm' => ['required', 'same:password'],
         ]);
         $user = new User();
@@ -162,7 +168,7 @@ class UsersController extends Controller
         $user->fonction = $request->fonction;
         $user->naissance = $request->naissance;
         $user->status = $request->status;
-        $user->role_id = $request->role_id;
+//        $user->role_id = $request->role_id;
         $user['password'] = Hash::make($request['password']);
         $user['password_confirm'] = Hash::make($request['password_confirm']);
         // $user->password_confirm = $request->password_confirm;
@@ -177,7 +183,7 @@ class UsersController extends Controller
         //     $maildata = [];
         //     $maildata['presse'] = $presse;
         //     Mail::to($mailinterne)->send(new Pressenotificate($maildata));
-        $user->save();
+        $user->update();
 
         // return Redirect::back('admin.users.index')->with("success", "information de l'agent mise à jour avec succès!");
         return redirect()->route("admin.users.index")->with("success",  "information de l'agent mise à jour avec succès!");
@@ -187,7 +193,7 @@ class UsersController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(User $user)
     {
@@ -195,5 +201,14 @@ class UsersController extends Controller
 
         // return Redirect::back()->with("success", "agent supprimé avec succès!");
         return redirect::back()->with("success",  "agent supprimé avec succès!");
+    }
+
+
+    //Affiche les roles et permissions
+    public function rolesPermision(){
+        $roles = Role::all();
+        $permissions = Permission::all();
+
+        dd($roles, $permissions);
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,14 +35,15 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 //partie utilisateurs
-Route::get('/list', [UsersController::class, 'index'])->name('admin.users.index');
-Route::get('/create', [UsersController::class, 'create'])->name('admin.users.create');
-Route::post('create/store', [UsersController::class, 'store'])->name('admin.users.store');
-Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('admin.users.edit');
-Route::post('/update', [UsersController::class, 'update'])->name('admin.users.update');
+Route::get('/user/list', [UsersController::class, 'index'])->name('admin.users.index');
+Route::get('/user/create', [UsersController::class, 'create'])->name('admin.users.create');
+Route::post('/user/create/store', [UsersController::class, 'store'])->name('admin.users.store');
+Route::get('/user/edit/{id}', [UsersController::class, 'edit'])->name('admin.users.edit');
+Route::post('/user/update', [UsersController::class, 'update'])->name('admin.users.update');
 Route::get('/show/{user}', [UsersController::class, 'show'])->name('admin.users.show');
 Route::delete('/destroy/{user}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
 Route::get('/stagiaire', [UsersController::class, 'stagiaire'])->name('admin.users.stagiaire');
+Route::get('/roles-permission', [UsersController::class, 'rolesPermision'])->name('roles-permission');
 
 
 // partie demande de permission

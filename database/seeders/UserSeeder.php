@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'fonction' => date('2000-02-01'),
             'photo' => 'Signo Marceline',
             'password_confirm' => bcrypt('12345'),
-            'status' => '0',
+            'status' => 'null',
         ]);
 
         $adminRole = Role::create(['name' => 'Admin']);
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
             'fonction' => date('2000-02-01'),
             'photo' => 'ST',
             'password_confirm' => bcrypt('12345'),
-            'status' => '0',
+            'status' => 'stagiaire',
         ]);
 
         $stagiaireRole = Role::create(['name' => 'Stagiaire']);
@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
             'fonction' => date('2000-02-01'),
             'photo' => 'ST',
             'password_confirm' => bcrypt('12345'),
-            'status' => '0',
+            'status' => 'personnel',
         ]);
 
         $personnelRole = Role::create(['name' => 'Personnel']);
